@@ -1,12 +1,42 @@
-# Picset AI Clone
+# XC AI Design
 
-AI-powered e-commerce product image generation platform built with Next.js 15 and FastAPI.
+> AI-powered e-commerce product image generation platform built with Next.js 15 and FastAPI.
 
-## Features
+[![GitHub](https://img.shields.io/badge/GitHub-xiaoche0907/xc--ai--design-blue?logo=github)](https://github.com/xiaoche0907/xc-ai-design)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Python-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 
-- **Studio Genesis (组图生成)**: Generate multiple professional e-commerce images from a single product photo
-- **Aesthetic Mirror (风格复刻)**: Clone the visual style from reference images
-- **Refinement Studio (图片精修)**: Fine-tune images with adjustments, filters, and export options
+## 🌟 Live Demo
+
+🚀 **[Visit Live Site](#)** (Coming Soon)
+
+## 📸 Preview
+
+Professional e-commerce AI image generation with modern, minimalist design.
+
+## ✨ Features
+
+### 🎨 Studio Genesis (组图生成)
+Generate multiple professional e-commerce images from a single product photo
+- AI-powered product analysis with Gemini-3-pro
+- Automatic selling point extraction
+- Batch generation of 5-10 styled product images
+- Real-time progress updates via WebSocket
+
+### 🎭 Aesthetic Mirror (风格复刻)
+Clone the visual style from reference images with 100% accuracy
+- Visual DNA extraction (colors, layout, lighting, decorations)
+- Single image or batch mode (up to 12 images)
+- Style fusion with product preservation
+- Turbo acceleration mode
+
+### ✨ Refinement Studio (图片精修)
+Fine-tune images with adjustments, filters, and export options
+- Brightness, contrast, saturation controls
+- Text overlay with positioning
+- Filter presets
+- Multi-size export for different platforms
 
 ## Tech Stack
 
@@ -66,7 +96,8 @@ picset-ai-clone/
 
 1. Clone the repository
 ```bash
-cd picset-ai-clone
+git clone https://github.com/xiaoche0907/xc-ai-design.git
+cd xc-ai-design
 ```
 
 2. Set up environment variables
