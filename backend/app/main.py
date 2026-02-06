@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.v1 import auth, tasks, upload
+from app.api.routes import studio_genesis, aesthetic_mirror
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -23,6 +24,10 @@ app.add_middleware(
 app.include_router(auth.router, prefix=settings.API_V1_PREFIX)
 app.include_router(tasks.router, prefix=settings.API_V1_PREFIX)
 app.include_router(upload.router, prefix=settings.API_V1_PREFIX)
+
+# 新增的增强路由
+app.include_router(studio_genesis.router, prefix=settings.API_V1_PREFIX)
+app.include_router(aesthetic_mirror.router, prefix=settings.API_V1_PREFIX)
 
 
 @app.get("/")
