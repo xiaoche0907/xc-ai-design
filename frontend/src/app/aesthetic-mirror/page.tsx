@@ -32,6 +32,25 @@ import { cn } from '@/lib/utils';
 type TaskStatus = 'idle' | 'processing' | 'completed';
 type TabMode = 'single' | 'batch';
 
+const ASPECT_RATIOS = [
+  { value: '1:1', label: '1:1 正方形' },
+  { value: '2:3', label: '2:3 竖版' },
+  { value: '3:2', label: '3:2 横版' },
+  { value: '3:4', label: '3:4 竖版' },
+  { value: '4:3', label: '4:3 横版' },
+  { value: '4:5', label: '4:5 竖版' },
+  { value: '5:4', label: '5:4 横版' },
+  { value: '9:16', label: '9:16 手机竖版' },
+  { value: '16:9', label: '16:9 宽屏' },
+  { value: '21:9', label: '21:9 超宽屏' },
+];
+
+const RESOLUTIONS = [
+  { value: '1k', label: '1K 标准' },
+  { value: '2k', label: '2K 高清 (仅Pro)' },
+  { value: '4k', label: '4K 超清 (仅Pro)' },
+];
+
 export default function AestheticMirrorPage() {
   const [mode, setMode] = useState<TabMode>('single');
   const [styleImage, setStyleImage] = useState<string | null>(null);
@@ -257,9 +276,9 @@ export default function AestheticMirrorPage() {
               <Card className="p-6 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">模型</label>
+                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">模型</label>
                     <Select value={model} onValueChange={setModel}>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-9 text-sm">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -270,43 +289,49 @@ export default function AestheticMirrorPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">尺寸比例</label>
+                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">尺寸比例</label>
                     <Select value={aspectRatio} onValueChange={setAspectRatio}>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-9 text-sm">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1:1">1:1 正方形</SelectItem>
-                        <SelectItem value="3:4">3:4 竖版</SelectItem>
-                        <SelectItem value="4:3">4:3 横版</SelectItem>
-                        <SelectItem value="9:16">9:16 长图</SelectItem>
+                        {ASPECT_RATIOS.map((ratio) => (
+                          <SelectItem key={ratio.value} value={ratio.value}>
+                            {ratio.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">清晰度</label>
+                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">清晰度</label>
                     <Select value={resolution} onValueChange={setResolution}>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-9 text-sm">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1k">1K 标准</SelectItem>
-                        <SelectItem value="2k">2K 高清 (仅Pro)</SelectItem>
+                        {RESOLUTIONS.map((res) => (
+                          <SelectItem key={res.value} value={res.value}>
+                            {res.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">生成数量</label>
+                  <div className="col-span-2">
+                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">生成数量</label>
                     <Select value={generateCount} onValueChange={setGenerateCount}>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-9 text-sm">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1">{mode === 'single' ? '1 张' : '1 组'}</SelectItem>
-                        <SelectItem value="2">{mode === 'single' ? '2 张' : '2 组'}</SelectItem>
-                        <SelectItem value="4">{mode === 'single' ? '4 张' : '4 组'}</SelectItem>
+                        {Array.from({ length: mode === 'single' ? 13 : 12 }, (_, i) => i + 1).map((num) => (
+                          <SelectItem key={num} value={String(num)}>
+                            {num} {mode === 'single' ? '张' : '组'}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
