@@ -1,25 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api-client';
 import { useAuthStore } from '@/stores/authStore';
-
-interface LoginCredentials {
-  email: string;
-  password: string;
-}
-
-interface RegisterData {
-  email: string;
-  password: string;
-  name?: string;
-}
-
-interface User {
-  id: string;
-  email: string;
-  name: string | null;
-  credits: number;
-  created_at: string;
-}
+import type { User, LoginCredentials, RegisterData } from '@/types/user';
 
 interface TokenResponse {
   access_token: string;

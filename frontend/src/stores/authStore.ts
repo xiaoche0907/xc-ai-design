@@ -10,7 +10,8 @@ interface AuthState {
   isLoading: boolean;
 
   // Actions
-  login: (credentials: LoginCredentials) => Promise<void>;
+  login: (user: User, token: string) => void;
+  loginWithCredentials: (credentials: LoginCredentials) => Promise<void>;
   register: (data: RegisterData) => Promise<void>;
   logout: () => void;
   setUser: (user: User) => void;
@@ -27,7 +28,19 @@ export const useAuthStore = create<AuthState>()(
         isAuthenticated: false,
         isLoading: false,
 
-        login: async (credentials: LoginCredentials) => {
+        login: (user: User, token: string) => {
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('auth-token', token);
+          }
+          set({
+            user,
+            token,
+            isAuthenticated: true,
+            isLoading: false,
+          });
+        },
+
+        loginWithCredentials: async (credentials: LoginCredentials) => {
           set({ isLoading: true });
           try {
             const response = await apiClient.post<AuthResponse>('/auth/login', credentials);
@@ -59,7 +72,7 @@ export const useAuthStore = create<AuthState>()(
             });
 
             // Auto-login after registration
-            await get().login({
+            await get().loginWithCredentials({
               email: data.email,
               password: data.password,
             });
